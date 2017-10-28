@@ -1,0 +1,1 @@
+require "#{Rails.root}/lib/nutrition_data/docstring_extensions.rb"

@@ -1,0 +1,41 @@
+food_group:
+  fields:
+    fdgrp_cd:
+      type: Integer
+      desc: <<~DOC
+          4-digit code identifying a food group. Only the first 2 digits are
+          currently assigned. In the future, the last 2 digits may be used.
+          Codes may not be consecutive.
+        DOC
+    description:
+      type: String
+      desc: Name of food group.
+data_src:
+  fields:
+    authors:
+      type: String
+      desc: List of authors for a journal article or name of sponsoring organization for other documents.
+    title:
+      type: String
+      desc: Title of article or name of document, such as a report from a company or trade association.
+    year:
+      type: Integer
+      desc: Year article or document was published.
+    journal:
+      type: String
+      desc: Name of the journal in which the article was published.
+    volume_city:
+      type: String
+      desc: Volume number for journal articles, books, or reports; city where sponsoring organization is located.
+    issue_state:
+      type: String
+      desc: Issue number for journal article; State where the sponsoring organization is located.
+    start_page:
+      type: String
+      desc: Starting page number of article/document.
+    end_page:
+      type: String
+      desc: Ending page number of article/document.
+    datasrc_id:
+      type: Integer
+      desc: Unique ID identifying the reference/source.

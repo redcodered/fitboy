@@ -2,7 +2,6 @@ module Nutrition
   class Nutrient < ApplicationRecord
     self.table_name = 'nutr_def'
     self.primary_key = 'nutr_no'
-    alias_attribute :id, :nutr_no
 
     has_many :nutrient_data_points,
              :class_name => 'Nutrition::NutrientDataPoint',

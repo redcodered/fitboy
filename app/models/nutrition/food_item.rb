@@ -3,8 +3,6 @@ module Nutrition
     self.table_name = 'food_des'
     self.primary_key = 'nbd_no'
 
-    alias_attribute :id, :nbd_no
-
     belongs_to :food_group,
                :class_name => 'Nutrition::FoodGroup',
                foreign_key: 'fdgrp_cd',
@@ -37,6 +35,13 @@ module Nutrition
                             join_table: 'datscrln',
                             foreign_key: 'datasrc_id',
                             association_foreign_key: 'nbd_no'
+
+    # TODO: Flesh out nutrition method
+    def nutrition
+      # this method will contain logic to serialize nutrient info. or flatten it anyway.
+      puts 'hi'
+    end
+
 
     def readonly?
       true

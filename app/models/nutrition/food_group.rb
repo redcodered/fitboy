@@ -11,5 +11,14 @@ module Nutrition
     def readonly?
       true
     end
+
+    def entity
+      Entity.new(self)
+    end
+
+    class Entity < Grape::Entity
+      expose :fdgrp_cd, as: :id, documentation: ds('food_group.fields.fdgrp_cd')
+      expose :description, documentation: ds('food_group.fields.description')
+    end
   end
 end

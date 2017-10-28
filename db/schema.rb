@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171020160435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "food_des", primary_key: "nbd_no", id: :integer, default: nil, force: :cascade do |t|
-    t.integer "fdggrp_cd", limit: 2
+    t.integer "fdgrp_cd", limit: 2
     t.string "long_description", limit: 255
     t.string "short_description", limit: 100
     t.string "common_name", limit: 255
@@ -58,11 +58,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.decimal "cho_factor", precision: 2
   end
 
-  create_table "footnote", id: false, force: :cascade, comment: "Footnotes FOOTNOTE" do |t|
-    t.integer "nbd_no"
-    t.integer "footnote_no"
+  create_table "footnote", primary_key: ["footnote_no", "nbd_no", "nutr_no"], force: :cascade, comment: "Footnotes FOOTNOTE" do |t|
+    t.integer "nbd_no", null: false
+    t.integer "footnote_no", null: false
     t.string "footnote_type", limit: 1
-    t.string "nutr_no", limit: 3
+    t.string "nutr_no", limit: 3, null: false
     t.string "footnote_text", limit: 255
   end
 
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["nbd_no"], name: "sr28_LanguaL_factor_NBD_No_index"
   end
 
-  create_table "nut_data", id: false, force: :cascade, comment: "Nutrient Data File NUT_DAT (hah.)" do |t|
+  create_table "nut_dat", id: false, force: :cascade, comment: "Nutrient Data File NUT_DAT (hah.)" do |t|
     t.integer "nbd_no", null: false
     t.integer "nutr_no", null: false
     t.decimal "nutrient_value"
@@ -110,16 +110,17 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "description", limit: 60
   end
 
-  create_table "weight", primary_key: "nbd_no", id: :integer, default: nil, force: :cascade, comment: "Weight File WEIGHT" do |t|
-    t.integer "seq"
-    t.decimal "amount", precision: 3
-    t.string "description", limit: 100
-    t.decimal "gram_weight", precision: 1
+  create_table "weight", primary_key: ["nbd_no", "seq"], force: :cascade, comment: "Weight File WEIGHT" do |t|
+    t.integer "nbd_no", null: false
+    t.integer "seq", null: false
+    t.decimal "amount"
+    t.string "description", limit: 200
+    t.decimal "gram_weight"
     t.integer "data_pts"
-    t.decimal "standard_deviation", precision: 3
+    t.decimal "standard_deviation"
   end
 
-  add_foreign_key "food_des", "fd_group", column: "fdggrp_cd", primary_key: "fdgrp_cd", name: "food_des_fd_group_fdgrp_cd_fk"
-  add_foreign_key "nut_data", "food_des", column: "nbd_no", primary_key: "nbd_no", name: "nut_data_food_des_nbd_no_fk"
-  add_foreign_key "nut_data", "nutr_def", column: "nutr_no", primary_key: "nutr_no", name: "nut_data_nutr_def_nutr_no_fk"
+  add_foreign_key "food_des", "fd_group", column: "fdgrp_cd", primary_key: "fdgrp_cd", name: "food_des_fd_group_fdgrp_cd_fk"
+  add_foreign_key "nut_dat", "food_des", column: "nbd_no", primary_key: "nbd_no", name: "nut_data_food_des_nbd_no_fk"
+  add_foreign_key "nut_dat", "nutr_def", column: "nutr_no", primary_key: "nutr_no", name: "nut_data_nutr_def_nutr_no_fk"
 end
