@@ -2,11 +2,10 @@ food_group:
   fields:
     fdgrp_cd:
       type: Integer
-      desc: <<~DOC
+      desc: >
           4-digit code identifying a food group. Only the first 2 digits are
           currently assigned. In the future, the last 2 digits may be used.
           Codes may not be consecutive.
-        DOC
     description:
       type: String
       desc: Name of food group.
@@ -39,3 +38,28 @@ data_src:
     datasrc_id:
       type: Integer
       desc: Unique ID identifying the reference/source.
+weight:
+  fields:
+    nbd_no:
+      type: Integer
+      desc: >
+          5-digit Nutrient Databank number that uniquely identifies a food item.
+          If this field is defined as numeric, the leading zero will be lost.
+    seq:
+      type: Integer
+      desc: Sequence number.
+    amount:
+      type: Decimal
+      desc: Unit modifier (for example, 1 in “1 cup”).
+    description:
+      type: String
+      desc: Description (for example, cup, diced, and 1-inch pieces).
+    gram_weight:
+      type: Decimal
+      desc: Gram weight.
+    data_pts:
+      type: Integer
+      desc: Number of data points.
+    standard_deviation:
+      type: Decimal
+      desc: Standard deviation.

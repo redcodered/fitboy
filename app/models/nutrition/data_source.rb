@@ -24,15 +24,15 @@ module Nutrition
     end
 
     class Entity < Grape::Entity
-      expose :authors, documentation: ds('data_src.fields.authors')
-      expose :title, documentation: ds('data_src.fields.title')
-      expose :year, documentation: ds('data_src.fields.year')
-      expose :journal, documentation: ds('data_src.fields.journal')
-      expose :volume_city, documentation: ds('data_src.fields.volume_city')
-      expose :issue_state, documentation: ds('data_src.fields.issue_state')
-      expose :start_page, documentation: ds('data_src.fields.start_page')
-      expose :end_page, documentation: ds('data_src.fields.end_page')
-      expose :datasrc_id, documentation: ds('data_src.fields.datasrc_id')
+      expose :authors
+      expose :title
+      expose :year
+      expose :journal
+      expose :volume_city
+      expose :issue_state
+      expose :start_page
+      expose :end_page
+      expose :datasrc_id
     end
   end
 end

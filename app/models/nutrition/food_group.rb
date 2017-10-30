@@ -17,8 +17,9 @@ module Nutrition
     end
 
     class Entity < Grape::Entity
-      expose :fdgrp_cd, as: :id, documentation: ds('food_group.fields.fdgrp_cd')
-      expose :description, documentation: ds('food_group.fields.description')
+
+      expose :fdgrp_cd
+      expose :description
     end
   end
 end

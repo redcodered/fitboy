@@ -1,6 +1,6 @@
-module NutritionData
+module Nutrition
   class Docstring
-    DOCSTRING_FILE_PATH = "#{Rails.root}/lib/nutrition_data/api_docstrings.yml"
+    DOCSTRING_FILE_PATH = "#{Rails.root}/lib/nutrition/api_docstrings.yml"
     def self.docstring(key)
       @@docfile ||= File.read(DOCSTRING_FILE_PATH)
       @@docstrings ||= YAML.load(@@docfile)

@@ -12,6 +12,7 @@ module Fitboy
     config.load_defaults 5.1
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.paths.add File.join('lib'), glob: File.join('**/*', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
     config.autoload_paths << Rails.root.join('lib')
 

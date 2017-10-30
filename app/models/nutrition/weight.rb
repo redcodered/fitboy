@@ -10,5 +10,20 @@ module Nutrition
     def readonly?
       true
     end
+
+    def entity
+      Entity.new(self)
+    end
+
+    class Entity < Grape::Entity
+      expose :nbd_no
+      expose :seq
+      expose :amount
+      expose :description
+      expose :gram_weight
+      expose :data_pts
+      expose :standard_deviation
+    end
+
   end
 end
