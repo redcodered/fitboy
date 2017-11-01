@@ -1,7 +1,7 @@
 module Nutrition
   class API < Grape::API
     version 'v1', using: :header, vendor: 'sckamar'
-    format :json
+
 
     resource :food do
       desc 'Get a food item.' do
