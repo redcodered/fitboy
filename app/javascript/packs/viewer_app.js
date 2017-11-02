@@ -1,1 +1,1 @@
-require('../viewer')
+require('../viewer_app')

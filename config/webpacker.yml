@@ -16,7 +16,10 @@ default: &default
   loaders:
     tsx:
       test: /\.tsx?$/
-      loader: "ts-loader"
+      loader: "awesome-typescript-loader"
+      exclude: /node_modules/
+
+  devtool: source-map
 
   extensions:
     - .coffee
