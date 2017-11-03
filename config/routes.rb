@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   mount Nutrition::API => '/nutrition/api'
   get '/nutrition/app', to: 'viewer_app#app'
+  get '/nutrition/test', to: 'viewer_app#test'
 end

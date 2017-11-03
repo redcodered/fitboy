@@ -36,7 +36,6 @@ module Nutrition
                             foreign_key: 'datasrc_id',
                             association_foreign_key: 'nbd_no'
 
-    # TODO: Flesh out nutrition method
     def nutrition
       ndp = nutrient_data_points
           .includes(:nutrient)

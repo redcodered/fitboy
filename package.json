@@ -8,6 +8,8 @@
     "@types/react-dom": "^16.0.2",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
+    "jquery": "^3.2.1",
+    "nutrition-label-jquery-plugin": "file:vendor/nutrition-label-master",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-addons-css-transition-group": "^15.0.1",
@@ -15,10 +17,12 @@
     "ts-loader": "^3.1.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.2.16",
+    "@types/node-fetch": "^1.6.7",
     "awesome-typescript-loader": "^3.3.0",
     "source-map-loader": "^0.2.3",
+    "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
-    "webpack-dev-server": "^2.9.2",
-    "ts-loader": "^3.1.1"
+    "webpack-dev-server": "^2.9.2"
   }
 }
