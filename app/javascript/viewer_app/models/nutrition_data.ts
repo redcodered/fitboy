@@ -2,7 +2,7 @@
  * Created by shanekamar on 11/3/17.
  */
 
- interface IFoodGroup {
+interface IFoodGroup {
     fdgrp_cd: string;
     description: string;
 }

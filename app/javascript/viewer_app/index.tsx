@@ -4,11 +4,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { NutritionLabel } from "./components/NutritionLabel";
+import { MenuExample } from "./components/MenuExample";
 
 ReactDOM.render(
     <div>
-        <NutritionLabel labelName="hi" />
+        <MenuExample />
     </div>,
     document.body.appendChild(document.createElement('div'))
 );

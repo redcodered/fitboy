@@ -14,13 +14,15 @@ export interface NutritionLabelState {
 export class NutritionLabel extends React.Component<NutritionLabelProps, {}> {
 
     $node : any;
+    node: any;
     label: any;
     el: any;
 
     public shouldComponentUpdate() { return false; }
 
     public componentDidMount() {
-        this.$node  = $(this.el);
+        this.node  = this.el;
+        this.$node = $(this.node);
         debugger;
         this.label = this.$node.nutritionLabel({
             'showServingUnitQuantity' : false,
@@ -54,6 +56,10 @@ export class NutritionLabel extends React.Component<NutritionLabelProps, {}> {
             'valueAddedSugars' : 17,
             'showLegacyVersion' : false
         });
+    }
+
+    public componentWillUnmount() {
+        ReactDOM.unmountComponentAtNode(this.node);
     }
 
     public render() {
