@@ -12,8 +12,23 @@ module Nutrition
         requires :nbd_no, type: Integer, desc: 'NDB Number'
       end
       route_param :nbd_no do
-        get do
+        get '/' do
           present FoodItem.find(params[:nbd_no]), using: FoodItem::Entity
+        end
+      end
+
+      namespace :search do
+        desc 'Search for a food item' do
+          named 'Search Food Items'
+          entity FoodItem::BasicEntity
+        end
+        params do
+          requires :query, type: String, desc: 'Search Query'
+        end
+        route_param :query do
+          get '/' do
+            present FoodItem.search(params[:query]), with: FoodItem::BasicEntity
+          end
         end
       end
     end

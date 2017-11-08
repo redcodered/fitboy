@@ -15,3 +15,4 @@
 //= require_tree .
 //= require jQuery/dist/jquery.min
 //= require nutrition-label-jquery-plugin/nutritionLabel-min
+//= require antd/dist/antd

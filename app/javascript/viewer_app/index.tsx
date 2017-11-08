@@ -4,11 +4,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { MenuExample } from "./components/MenuExample";
+import { PrimaryInitialLayout } from "./layouts/PrimaryInitialLayout";
 
 ReactDOM.render(
     <div>
-        <MenuExample />
+        <PrimaryInitialLayout />
     </div>,
     document.body.appendChild(document.createElement('div'))
 );
