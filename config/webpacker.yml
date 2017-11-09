@@ -13,12 +13,21 @@ default: &default
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
 
+  loaders:
+    tsx:
+      test: /\.tsx?$/
+      loader: "awesome-typescript-loader"
+      exclude: /node_modules/
+
+  devtool: source-map
+
   extensions:
     - .coffee
     - .erb
     - .js
     - .jsx
     - .ts
+    - .tsx
     - .vue
     - .sass
     - .scss

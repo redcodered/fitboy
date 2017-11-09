@@ -1,5 +1,7 @@
 module Nutrition
   class FoodItem < ApplicationRecord
+    KCAL_NUTR_NO = 208
+
     self.table_name = 'food_des'
     self.primary_key = 'nbd_no'
 
@@ -36,13 +38,31 @@ module Nutrition
                             foreign_key: 'datasrc_id',
                             association_foreign_key: 'nbd_no'
 
-    # TODO: Flesh out nutrition method
+    class << self
+      def search(query)
+        q = <<~HEREDOC
+          ( short_description ~* '%s' 
+            OR long_description ~* '%s' 
+            OR manufacturer_name ~* '%s'
+            OR scientific_name ~* '%s' )
+        HEREDOC
+        self.where query.split.map { |w| q % ([w]*4) }.join(' AND ')
+      end
+    end
+
     def nutrition
       ndp = nutrient_data_points
           .includes(:nutrient)
           .order('nutr_def.sr_order')
           .to_a
       serving_sizes.map { |portion| NutritionInfoStruct.new(portion, ndp) }
+    end
+
+    def calories
+      NutrientDataPoint.find_by(
+        nbd_no: nbd_no,
+        nutr_no: KCAL_NUTR_NO)
+          .nutrient_value.to_i
     end
 
     def readonly?
@@ -90,12 +110,23 @@ module Nutrition
 
     end
 
+    class BasicEntity < Grape::Entity
+      expose :nbd_no
+      expose :long_description
+      expose :scientific_name
+      expose :short_description
+      expose :manufacturer_name
+      expose :common_name
+      expose :calories
+    end
+
     class Entity < Grape::Entity
       # Properties
       expose :nbd_no
       expose :long_description
       expose :short_description
       expose :common_name
+      expose :scientific_name
       expose :manufacturer_name
       expose :survey
       expose :refuse_percent
