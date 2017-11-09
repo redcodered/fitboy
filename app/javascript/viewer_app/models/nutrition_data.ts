@@ -30,6 +30,15 @@ interface IPortionWeightInfo {
     standard_deviation: number;
 }
 
+interface IShortFoodItem {
+    nbd_no: string;
+    long_description: string;
+    common_name: string;
+    manufacturer_name: string;
+    scientific_name: string;
+    calories: number;
+}
+
 interface IFoodItem {
     nbd_no: string;
     long_description: string;
@@ -47,6 +56,7 @@ export {
     IFoodItem,
     IPortionNutrientData,
     INutrientDataPoint,
-    IPortionWeightInfo
+    IPortionWeightInfo,
+    IShortFoodItem
  };
 

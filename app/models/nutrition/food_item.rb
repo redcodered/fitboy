@@ -115,6 +115,7 @@ module Nutrition
       expose :long_description
       expose :scientific_name
       expose :short_description
+      expose :manufacturer_name
       expose :common_name
       expose :calories
     end
