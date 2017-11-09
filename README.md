@@ -7,7 +7,7 @@ The tool aims to incorporate the USDA's SR28 dataset--the official semi-annual p
 data covering a large majority of major foods, as well as the freely available, crowdsourced food information
 dataset "open foods".
 
-** This is a work-in-progress document. **
+*This is a work-in-progress document.*
 
 # Architecture
 
