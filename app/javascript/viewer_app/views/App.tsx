@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Layout, Menu, Breadcrumb, Icon, Affix, Row, Col, Input } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Affix, Row, Col, Input, AutoComplete } from 'antd';
 const { SubMenu } = Menu;
 const Search = Input.Search;
 const { Header, Content, Sider } = Layout;
 
 import { NutritionLayout } from './NutritionLayout';
+import { FoodSearch } from '../components/FoodSearch';
 
 import { SR28DataClient, SR28LocalDBClient, ISR28Client } from '../models/nutrition_data_srvc';
 import * as NutritionData from '../models/nutrition_data';
@@ -15,17 +16,12 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 
 interface AppProps {
-    sr28_datasrc : ISR28Client;
+    sr28_datasrc? : ISR28Client;
 }
 
 export class App extends React.Component<AppProps,{}> {
     constructor(props) {
         super(props);
-        console.log(this.props.sr28_datasrc.push_me());
-        console.log(SR28DataClient.search('butter%20lowfat', (d: Array<NutritionData.IShortFoodItem>) => {
-            d.forEach((d: IShortFoodItem) => { console.log(d.long_description); } )
-        }));
-        // debugger;
     }
     public render() {
         return (
@@ -47,11 +43,7 @@ export class App extends React.Component<AppProps,{}> {
                             </Menu>
                         </Col>
                         <Col span={8} offset={8} order={2}>
-                            <Search
-                                style={{ width: '100%' }}
-                                placeholder="Search Foods"
-                                onSearch={value => console.log(value)}
-                            />
+                            <FoodSearch />
                         </Col>
                     </Row>
                 </Header>

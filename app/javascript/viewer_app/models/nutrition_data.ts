@@ -39,6 +39,11 @@ interface IShortFoodItem {
     calories: number;
 }
 
+interface IFoodItemSearchContainer {
+    group_name: string;
+    items: Array<IShortFoodItem>;
+}
+
 interface IFoodItem {
     nbd_no: string;
     long_description: string;
@@ -57,6 +62,7 @@ export {
     IPortionNutrientData,
     INutrientDataPoint,
     IPortionWeightInfo,
-    IShortFoodItem
+    IShortFoodItem,
+    IFoodItemSearchContainer
  };
 

@@ -27,7 +27,7 @@ module Nutrition
         end
         route_param :query do
           get '/' do
-            present FoodItem.search(params[:query]), with: FoodItem::BasicEntity
+            present FoodItem.search(params[:query]), with: FoodItem::SearchContainer
           end
         end
       end

@@ -5,11 +5,11 @@ const API_BASE : String = "/nutrition/api";
 
 export namespace SR28DataClient {
     export function search(query: String,
-                           cb: (d : Array<NutritionData.IShortFoodItem>) => any) : String {
+                           cb: (d : Array<NutritionData.IFoodItemSearchContainer>) => any) : String {
         fetch(API_BASE + "/food/search/" + query)
             .then((response) => {
-                if(response.ok) { return response.json() }
-        }).then(cb);
+                if(response.ok) { return response.json() } else {return [];}
+        }).then((data) => cb(data.results));
         return "";
     }
 }
