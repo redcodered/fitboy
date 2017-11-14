@@ -8,28 +8,37 @@ import * as NutritionData from '../models/nutrition_data';
 import {IFoodItemSearchContainer, IShortFoodItem} from "../models/nutrition_data";
 
 interface FoodSearchProps {
-
+    history: any;
+    match: any;
+    location: any
 }
 //
 interface FoodSearchState {
-    // text : string;
+    text?: string;
     result : Array<NutritionData.IFoodItemSearchContainer>;
 }
 
-export class FoodSearch extends React.Component<{}, {}> {
 
+export class FoodSearch extends React.Component<FoodSearchProps | any, {}> {
+    public constructor(props) {
+        super(props);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
+
+    }
     public handleSearch(value: string) : void {
         if(value == '') {
             this.setState({result: []});
         } else {
             SR28DataClient.search(value,
                 (d: Array<NutritionData.IFoodItemSearchContainer>) =>
-                    this.setState({result: d}));
+                    this.setState({result: d, text: value}));
         }
     }
 
     state = {
         result: [],
+        text: '',
     };
 
     public renderGroup(group_name : string, items: Array<IShortFoodItem>)  {
@@ -48,20 +57,27 @@ export class FoodSearch extends React.Component<{}, {}> {
         );
     }
 
+    public handleSelect(d: any) {
+        this.props.history.push(`/nutrition/food/${d}`);
+        // this.setState({text: this.state.text});
+    }
+
     public render() {
         const { result } = this.state;
         const children = result.map(
             (item) => { return this.renderGroup(item.group_name, item.items); });
         return (
             <AutoComplete
-                onChange={this.handleSearch.bind(this)}
+                onChange={this.handleSearch}
                 dataSource={children}
-                onSelect={d => console.log('onselect', d)}
+                onSelect={this.handleSelect}
                 style={{ width: '100%' }}
             >
                 <Search
                     style={{ width: '100%' }}
                     placeholder="Search Foods"
+                    ref="search"
+                    value={this.props.text}
                     onSearch={value => console.log(value)}
                 >
                 </Search>
@@ -69,3 +85,4 @@ export class FoodSearch extends React.Component<{}, {}> {
         );
     }
 }
+

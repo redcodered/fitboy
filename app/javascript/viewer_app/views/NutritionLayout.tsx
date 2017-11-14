@@ -2,10 +2,22 @@ import * as React from "react";
 import { Layout, Menu, Breadcrumb, Icon, Affix, Row, Col, Input } from 'antd';
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
+import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 
-export class NutritionLayout extends React.Component<{},{}> {
+import { FoodItemView } from './FoodItemView';
 
+interface NutritionLayoutProps {
+    history: any;
+    match: any;
+    location: any
+}
+
+export class NutritionLayout extends React.Component<NutritionLayoutProps,{}> {
+    public constructor(props) {
+        super(props);
+        console.log('nutlay');
+    }
     public render() {
         return (
         <Layout>
@@ -36,16 +48,9 @@ export class NutritionLayout extends React.Component<{},{}> {
                     </SubMenu>
                 </Menu>
             </Sider>
-            <Layout style={{padding: '0 24px 24px'}}>
-                <Breadcrumb style={{margin: '16px 0'}}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 280}}>
-                    Content
-                </Content>
-            </Layout>
+            <Switch>
+                <Route path="/nutrition/food/:ndb_no" component={FoodItemView} />
+            </Switch>
         </Layout> )
     }
 }

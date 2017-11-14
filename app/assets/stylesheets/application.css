@@ -16,4 +16,5 @@
  *= // require_tree ../../../node_modules/@blueprintjs/core/dist
  *= require normalize.css/normalize
  *= require antd/dist/antd
+ *= require nutrition_app
  */

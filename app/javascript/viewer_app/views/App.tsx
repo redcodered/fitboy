@@ -13,22 +13,25 @@ import { SR28DataClient, SR28LocalDBClient, ISR28Client } from '../models/nutrit
 import * as NutritionData from '../models/nutrition_data';
 import {IShortFoodItem} from "../models/nutrition_data";
 import { Switch, Route, Link } from 'react-router-dom';
-
-
+import { withRouter } from 'react-router';
 interface AppProps {
     sr28_datasrc? : ISR28Client;
 }
 
 export class App extends React.Component<AppProps,{}> {
+
     constructor(props) {
         super(props);
     }
     public render() {
+        const RoutedFoodSearch = withRouter(FoodSearch);
         return (
         <Layout>
             <Affix>
                 <Header className="header">
                     <Row type="flex">
+                        <Col span={2} className="app-logo">
+                        </Col>
                         <Col span={8} order={1}>
                             <Menu
                                 theme="dark"
@@ -42,14 +45,17 @@ export class App extends React.Component<AppProps,{}> {
                                 <Menu.Item key="main-analysis">Analysis</Menu.Item>
                             </Menu>
                         </Col>
-                        <Col span={8} offset={8} order={2}>
-                            <FoodSearch />
+                        <Col span={8} offset={6} order={2}>
+                            <RoutedFoodSearch />
                         </Col>
                     </Row>
                 </Header>
             </Affix>
             <Switch>
-                <Route path="/nutrition" exact component={NutritionLayout} />
+                <Route path="/nutrition/" exact component={NutritionLayout} />
+                <Route path="/nutrition/food/:nbd_no" component={NutritionLayout} />
+
+                {/*<Route path="/nutrition/food/:nbd_no" component={NutritionLayout} />*/}
             </Switch>
         </Layout> );
     }

@@ -38,6 +38,12 @@ module Nutrition
                             foreign_key: 'datasrc_id',
                             association_foreign_key: 'nbd_no'
 
+    delegate :fdgrp_cd, to: :food_group
+
+    def fdgrp_desc
+      food_group.description
+    end
+
     class << self
       def search(query)
         q = <<~HEREDOC
@@ -123,6 +129,8 @@ module Nutrition
       expose :manufacturer_name
       expose :common_name
       expose :calories
+      expose :fdgrp_cd
+      expose :fdgrp_desc
     end
 
     class SearchResultGroup < Grape::Entity

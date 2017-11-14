@@ -10,7 +10,7 @@ import { SR28LocalDBClient } from "./models/nutrition_data_srvc"
 
 ReactDOM.render(
     <div>
-        <BrowserRouter basename="/nutrition/app">
+        <BrowserRouter basename="/app">
             <App />
         </BrowserRouter>
     </div>,
