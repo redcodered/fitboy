@@ -27,7 +27,7 @@ module Nutrition
         end
         route_param :nbd_no do
           get '/' do
-            present :food_info, FoodItem.find(params[:nbd_no]), with: FoodItem::BasicEntity
+            present :food_info, FoodItem.find(params[:nbd_no]), with: FoodItem::Entity
             present :nutrition_info, FlatFoodItem.find(params[:nbd_no]), using: FlatFoodItem::Entity
           end
         end

@@ -48,16 +48,18 @@ interface IFoodItem {
     nbd_no: string;
     long_description: string;
     common_name: string;
+    short_description: string;
     manufacturer_name: string;
     survey: string;
     refuse_percent: string;
+    scientific_name: string;
     food_group: IFoodGroup;
     serving_sizes: Array<IPortionWeightInfo>;
     nutrition: Array<IPortionNutrientData>;
 }
 
 interface IFoodShortResponseItem {
-    food_info: IShortFoodItem;
+    food_info: IFoodItem;
     nutrition_info: IFoodNutritionInfo;
 }
 

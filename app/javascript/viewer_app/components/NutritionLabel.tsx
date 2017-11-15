@@ -5,6 +5,7 @@ import * as NutritionData from "../models/nutrition_data";
 
 export interface NutritionLabelProps {
     labelName: string;
+    options: any; // Cheap hack -- this has far too many options to declare in full form.
 }
 
 export interface NutritionLabelState {
@@ -23,14 +24,15 @@ export class NutritionLabel extends React.Component<NutritionLabelProps, {}> {
     public componentDidMount() {
         this.node  = this.el;
         this.$node = $(this.node);
-        debugger;
-        this.label = this.$node.nutritionLabel({
-            'showServingUnitQuantity' : false,
-            'itemName' : 'Bleu Cheese Dressing',
-            'ingredientList' : 'Bleu Cheese Dressing',
+        this.updateOptions(this.props.options);
+    }
+
+    updateOptions(newOpts) {
+        let options = {};
+        Object.assign(options, {
+            'showServingUnitQuantity' : true,
 
             'decimalPlacesForQuantityTextbox' : 2,
-            'valueServingUnitQuantity' : 1,
 
             'allowFDARounding' : true,
             'decimalPlacesForNutrition' : 2,
@@ -38,28 +40,20 @@ export class NutritionLabel extends React.Component<NutritionLabelProps, {}> {
             'showPolyFat' : false,
             'showMonoFat' : false,
 
-            'valueCalories' : 450,
-            'valueFatCalories' : 430,
-            'valueTotalFat' : 48,
-            'valueSatFat' : 6,
-            'valueTransFat' : 0,
-            'valueCholesterol' : 30,
-            'valueSodium' : 780,
-            'valueTotalCarb' : 3,
-            'valueFibers' : 0,
-            'valueSugars' : 3,
-            'valueProteins' : 3,
-            'valueVitaminD' : 1.22,
-            'valuePotassium_2018' : 4.22,
-            'valueCalcium' : 7.22,
-            'valueIron' : 11.22,
-            'valueAddedSugars' : 17,
             'showLegacyVersion' : false
         });
+        Object.assign(options, newOpts);
+        this.label = this.$node.nutritionLabel(options);
     }
 
     public componentWillUnmount() {
         ReactDOM.unmountComponentAtNode(this.node);
+    }
+
+    public componentWillReceiveProps(newProps) {
+        this.forceUpdate();
+        this.updateOptions(newProps.options);
+
     }
 
     public render() {

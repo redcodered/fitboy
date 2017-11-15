@@ -52,10 +52,7 @@ export class App extends React.Component<AppProps,{}> {
                 </Header>
             </Affix>
             <Switch>
-                <Route path="/nutrition/" exact component={NutritionLayout} />
-                <Route path="/nutrition/food/:nbd_no" component={NutritionLayout} />
-
-                {/*<Route path="/nutrition/food/:nbd_no" component={NutritionLayout} />*/}
+                <Route path="/nutrition/" component={NutritionLayout} />
             </Switch>
         </Layout> );
     }
