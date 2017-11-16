@@ -53,6 +53,7 @@ export namespace SR28DataClient {
                 valueServingSizeQuantity: servingSize.amount,
                 allowCustomWidth: true,
                 allowNoBorder: true,
+                showLegacyVersion: false,
             });
             return options;
         });

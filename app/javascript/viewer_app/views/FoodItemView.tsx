@@ -60,7 +60,7 @@ export class FoodItemView extends React.Component<FoodItemViewProps, FoodItemVie
                         <Panel header="Basic Information" key="basic-info">
                             <BasicInformationPanel foodInfo={food} />
                         </Panel>
-                        <Panel header="Nutrition Labels" key="nut-labels">
+                        <Panel header="Nutrition Labels" style={{padding: '0px'}} key="nut-labels">
                             <NutritionLabelsPanel nutritionInfo={nutrition} foodInfo={food}/>
                         </Panel>
                     </Collapse>
@@ -105,8 +105,13 @@ class NutritionLabelsPanel extends React.Component<{
         while (labels.length > 0)
             arrays.push(labels.splice(0, size));
 
+        // It is important here to use a unique key for each react element
+        // and its children to make sure each nutrition panel can be uniquely
+        // referenced by the component code to make the interactive
+        // features work and make sure a new panel is drawn
+        // when a new food is selected.
         return (
-            <div style={{ padding: '8px', background: '#ECECEC' }}>
+            <div style={{ padding: '0px', background: '#D0D0D0' }}>
                 {arrays.map((row, rowIndex) => {
                     return (
                         <Row
