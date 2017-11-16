@@ -34,7 +34,7 @@ or are a requirement of another component, but these are the primary components:
 
 ## Backend
 
-* Ruby v.2.3.0 (__this needs to be updated, 2.3.0 is known to be a bit buggy__)
+* Ruby v.2.3.1
 * Rails 5
 * PostgreSQL 10.0
 * MongoDB 3.4
