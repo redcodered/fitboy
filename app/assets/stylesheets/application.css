@@ -12,4 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require nutrition-label-jquery-plugin/nutritionLabel-min
+ *= // require_tree ../../../node_modules/@blueprintjs/core/dist
+ *= require normalize.css/normalize
+ *= require antd/dist/antd
+ *= require nutrition_app
  */
