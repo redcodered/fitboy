@@ -4,3 +4,24 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+.nutrition-labels-panel  {
+  .ant-collapse-content {
+    padding: 0px;
+
+    .ant-collapse-content-box {
+      padding-top: 0px;
+    }
+  }
+
+
+
+  .ant-card {
+    border-radius: 20px;
+
+  }
+
+  .ant-card-head {
+    border-radius: 20px 20px 0px 0px;
+  }
+}

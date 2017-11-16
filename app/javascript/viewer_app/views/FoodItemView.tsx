@@ -60,7 +60,7 @@ export class FoodItemView extends React.Component<FoodItemViewProps, FoodItemVie
                         <Panel header="Basic Information" key="basic-info">
                             <BasicInformationPanel foodInfo={food} />
                         </Panel>
-                        <Panel header="Nutrition Labels" style={{padding: '0px'}} key="nut-labels">
+                        <Panel header="Nutrition Labels" className="nutrition-labels-panel" key="nut-labels">
                             <NutritionLabelsPanel nutritionInfo={nutrition} foodInfo={food}/>
                         </Panel>
                     </Collapse>
@@ -116,7 +116,7 @@ class NutritionLabelsPanel extends React.Component<{
                     return (
                         <Row
                             gutter={16}
-                            style={{ padding: '24px' }}
+                            style={{ padding: '12px' }}
                             key={`row-nutrition-${nbd_no}-${rowIndex}`}
                         >
                             {row.map((col, colIndex) => {return (
