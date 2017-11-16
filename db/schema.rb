@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20171020160435) do
     t.string "common_name", limit: 255
     t.string "manufacturer_name", limit: 255
     t.string "survey", limit: 1
-    t.string "fefuse_description", limit: 255
+    t.string "refuse_description", limit: 255
     t.integer "refuse_percent", limit: 2
     t.string "scientific_name", limit: 255
     t.decimal "nitrogen_factor"
@@ -104,6 +104,61 @@ ActiveRecord::Schema.define(version: 20171020160435) do
     t.integer "num_dec"
     t.integer "sr_order"
     t.index ["nutr_no"], name: "sr28_nutrient_definition_Nutr_No_uindex", unique: true
+  end
+
+  create_table "sr28_condensed", primary_key: "ndb_no", id: :integer, force: :cascade do |t|
+    t.string "shrt_desc", limit: 60
+    t.float "water_g"
+    t.integer "energ_kcal"
+    t.float "protein_g"
+    t.float "lipid_tot_g"
+    t.float "ash_g"
+    t.float "carbohydrt_g"
+    t.float "fiber_td_g"
+    t.float "sugar_tot_g", default: 0.0
+    t.integer "calcium_mg"
+    t.float "iron_mg"
+    t.float "magnesium_mg", default: 0.0
+    t.integer "phosphorus_mg"
+    t.integer "potassium_mg"
+    t.integer "sodium_mg"
+    t.float "zinc_mg", default: 0.0
+    t.float "copper_mg", default: 0.0
+    t.float "manganese_mg", default: 0.0
+    t.float "selenium_mu_g", default: 0.0
+    t.float "vit_c_mg"
+    t.float "thiamin_mg", default: 0.0
+    t.float "riboflavin_mg", default: 0.0
+    t.float "niacin_mg", default: 0.0
+    t.float "panto_acid_mg", default: 0.0
+    t.float "vit_b6_mg", default: 0.0
+    t.float "folate_tot_mu_g", default: 0.0
+    t.float "folic_acid_mu_g", default: 0.0
+    t.float "food_folate_mu_g", default: 0.0
+    t.float "folate_dfe_mu_g", default: 0.0
+    t.float "choline_tot_mg", default: 0.0
+    t.float "vit_b12_mu_g", default: 0.0
+    t.integer "vit_a_iu"
+    t.float "vit_a_rae", default: 0.0
+    t.float "retinol_mu_g", default: 0.0
+    t.float "alpha_carot_mu_g", default: 0.0
+    t.float "beta_carot_mu_g", default: 0.0
+    t.float "beta_crypt_mu_g", default: 0.0
+    t.float "lycopene_mu_g", default: 0.0
+    t.float "lut_zea_mu_g", default: 0.0
+    t.float "vit_e_mg", default: 0.0
+    t.float "vit_d_mu_g", default: 0.0
+    t.float "vit_d_iu", default: 0.0
+    t.float "vit_k_mu_g", default: 0.0
+    t.float "fa_sat_g"
+    t.float "fa_mono_g", default: 0.0
+    t.float "fa_poly_g", default: 0.0
+    t.integer "cholestrl_mg"
+    t.float "gmwt_1"
+    t.string "gmwt_desc1", limit: 120
+    t.float "gmwt_2", default: 0.0
+    t.string "gmwt_desc2", limit: 120
+    t.integer "refuse_pct"
   end
 
   create_table "src_cd", primary_key: "src_cd", id: :integer, default: nil, force: :cascade, comment: "Source Code File Format" do |t|

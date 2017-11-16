@@ -17,6 +17,22 @@ module Nutrition
         end
       end
 
+      namespace :condensed do
+        desc 'Get a food item (condensed nutrition info).' do
+          named 'Get Food Item'
+          entity FlatFoodItem::Entity
+        end
+        params do
+          requires :nbd_no, type: Integer, desc: 'NDB Number'
+        end
+        route_param :nbd_no do
+          get '/' do
+            present :food_info, FoodItem.find(params[:nbd_no]), with: FoodItem::Entity
+            present :nutrition_info, FlatFoodItem.find(params[:nbd_no]), using: FlatFoodItem::Entity
+          end
+        end
+      end
+
       namespace :search do
         desc 'Search for a food item' do
           named 'Search Food Items'
@@ -27,7 +43,7 @@ module Nutrition
         end
         route_param :query do
           get '/' do
-            present FoodItem.search(params[:query]), with: FoodItem::BasicEntity
+            present FoodItem.search(params[:query]), with: FoodItem::SearchContainer
           end
         end
       end
@@ -57,7 +73,7 @@ module Nutrition
       end
     end
 
-    add_swagger_documentation base_path: '/nutrition/api'
+    add_swagger_documentation base_path: '/api/nutrition'
 
   end
 end

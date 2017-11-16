@@ -38,6 +38,12 @@ module Nutrition
                             foreign_key: 'datasrc_id',
                             association_foreign_key: 'nbd_no'
 
+    delegate :fdgrp_cd, to: :food_group
+
+    def fdgrp_desc
+      food_group.description
+    end
+
     class << self
       def search(query)
         q = <<~HEREDOC
@@ -46,7 +52,12 @@ module Nutrition
             OR manufacturer_name ~* '%s'
             OR scientific_name ~* '%s' )
         HEREDOC
-        self.where query.split.map { |w| q % ([w]*4) }.join(' AND ')
+        ret = self.where(query.split.map { |w| q % ([w]*4) }.join(' AND '))
+            .joins(:food_group)
+            .limit(100)
+            .group_by {|item| item.food_group.description }
+            .map {|cat, items| {group_name: cat, items: items}}
+        return { results: ret }
       end
     end
 
@@ -118,6 +129,17 @@ module Nutrition
       expose :manufacturer_name
       expose :common_name
       expose :calories
+      expose :fdgrp_cd
+      expose :fdgrp_desc
+    end
+
+    class SearchResultGroup < Grape::Entity
+      expose :group_name
+      expose :items, with: FoodItem::BasicEntity
+    end
+
+    class SearchContainer < Grape::Entity
+      expose :results, with: FoodItem::SearchResultGroup
     end
 
     class Entity < Grape::Entity

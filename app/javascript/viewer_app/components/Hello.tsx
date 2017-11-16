@@ -29,3 +29,8 @@ export class Hello extends React.Component<HelloProps, {}> {
         </div>;
     }
 }
+
+// console.log(this.props.sr28_datasrc.push_me());
+// console.log(SR28DataClient.search('butter%20lowfat', (d: Array<NutritionData.IShortFoodItem>) => {
+//     d.forEach((d: IShortFoodItem) => { console.log(d.long_description); } )
+// }));

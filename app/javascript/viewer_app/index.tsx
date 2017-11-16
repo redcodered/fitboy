@@ -10,9 +10,8 @@ import { SR28LocalDBClient } from "./models/nutrition_data_srvc"
 
 ReactDOM.render(
     <div>
-        <BrowserRouter basename="/nutrition/app">
-            <SR28LocalDBClient ref="local_db_client"/>
-            <App sr28_datasrc={this.refs.local_db_client}/>
+        <BrowserRouter basename="/app">
+            <App />
         </BrowserRouter>
     </div>,
     document.body.appendChild(document.createElement('div'))
