@@ -68,3 +68,6 @@ gem 'grape-swagger-rails'
 
 # User Authentication
 gem 'devise'
+
+# Fontawesome
+gem 'font-awesome-sass'
