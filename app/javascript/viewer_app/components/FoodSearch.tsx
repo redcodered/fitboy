@@ -22,8 +22,8 @@ interface FoodSearchState {
 export class FoodSearch extends React.Component<FoodSearchProps | any, {}> {
     public constructor(props) {
         super(props);
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleSelect = this.handleSelect.bind(this);
+        // this.handleSearch = this.handleSearch.bind(this);
+        // this.handleSelect = this.handleSelect.bind(this);
 
     }
     public handleSearch(value: string) : void {
@@ -57,7 +57,7 @@ export class FoodSearch extends React.Component<FoodSearchProps | any, {}> {
         );
     }
 
-    public handleSelect(d: any) {
+    public handleSelect(d: string) : void {
         this.props.history.push(`/nutrition/food/${d}`);
         // this.setState({text: this.state.text});
     }

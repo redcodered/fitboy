@@ -1,3 +1,4 @@
+// Style the logo in the upper left corner of the layout.
 .app-logo {
   background-image: image_url('fitboy_logo.png');
   background-size: contain;
@@ -5,22 +6,35 @@
   background-position: center center;
 }
 
+// Styles related to the "nutrition labels" panel of the food information
+// page/layout.
 .nutrition-labels-panel  {
+  // Eliminate the padding on the sides of the panel content box
+  // in order to present a more seamless experience: the box containing
+  // the nutrition panels, which are white, is a darker shade of gray
+  // than the background around the rest of the informatino page.
   .ant-collapse-content {
     padding: 0px;
 
+    // The content box should be flush with the panel title header,
+    // such that the darker gray panel immediately flows from the
+    // section hearder.
     .ant-collapse-content-box {
       padding-top: 0px;
     }
   }
 
-
-
+  // Round off the corners of the nutritional panel "cards" here.
   .ant-card {
     border-radius: 20px;
 
   }
 
+  // Round off the top part of the nutrition panel card hearder,
+  // leaving the bottom corners "square" flush with the rest of the
+  // card, giving the whole card a rounded appearance while
+  // maintaining a solid flow between the card header and
+  // the card content itself.
   .ant-card-head {
     border-radius: 20px 20px 0px 0px;
   }

@@ -30,13 +30,13 @@ class CreateInitialSchema < ActiveRecord::Migration[5.1]
     end
 
     create_table "food_des", primary_key: "nbd_no", id: :integer, default: nil, force: :cascade do |t|
-      t.integer "fdggrp_cd", limit: 2
+      t.integer "fdgrp_cd", limit: 2
       t.string "long_description", limit: 255
       t.string "short_description", limit: 100
       t.string "common_name", limit: 255
       t.string "manufacturer_name", limit: 255
       t.string "survey", limit: 1
-      t.string "fefuse_description", limit: 255
+      t.string "refuse_description", limit: 255
       t.integer "refuse_percent", limit: 2
       t.string "scientific_name", limit: 255
       t.decimal "nitrogen_factor"
@@ -45,11 +45,11 @@ class CreateInitialSchema < ActiveRecord::Migration[5.1]
       t.decimal "cho_factor", precision: 2
     end
 
-    create_table "footnote", id: false, force: :cascade, comment: "Footnotes FOOTNOTE" do |t|
-      t.integer "nbd_no"
-      t.integer "footnote_no"
+    create_table "footnote", primary_key: ["footnote_no", "nbd_no", "nutr_no"], force: :cascade, comment: "Footnotes FOOTNOTE" do |t|
+      t.integer "nbd_no", null: false
+      t.integer "footnote_no", null: false
       t.string "footnote_type", limit: 1
-      t.string "nutr_no", limit: 3
+      t.string "nutr_no", limit: 3, null: false
       t.string "footnote_text", limit: 255
     end
 
@@ -63,7 +63,7 @@ class CreateInitialSchema < ActiveRecord::Migration[5.1]
       t.index ["nbd_no"], name: "sr28_LanguaL_factor_NBD_No_index"
     end
 
-    create_table "nut_data", id: false, force: :cascade, comment: "Nutrient Data File NUT_DAT (hah.)" do |t|
+    create_table "nut_dat", id: false, force: :cascade, comment: "Nutrient Data File NUT_DAT (hah.)" do |t|
       t.integer "nbd_no", null: false
       t.integer "nutr_no", null: false
       t.decimal "nutrient_value"
@@ -93,22 +93,78 @@ class CreateInitialSchema < ActiveRecord::Migration[5.1]
       t.index ["nutr_no"], name: "sr28_nutrient_definition_Nutr_No_uindex", unique: true
     end
 
+    create_table "sr28_condensed", primary_key: "ndb_no", id: :integer, force: :cascade do |t|
+      t.string "shrt_desc", limit: 60
+      t.float "water_g"
+      t.integer "energ_kcal"
+      t.float "protein_g"
+      t.float "lipid_tot_g"
+      t.float "ash_g"
+      t.float "carbohydrt_g"
+      t.float "fiber_td_g"
+      t.float "sugar_tot_g", default: 0.0
+      t.integer "calcium_mg"
+      t.float "iron_mg"
+      t.float "magnesium_mg", default: 0.0
+      t.integer "phosphorus_mg"
+      t.integer "potassium_mg"
+      t.integer "sodium_mg"
+      t.float "zinc_mg", default: 0.0
+      t.float "copper_mg", default: 0.0
+      t.float "manganese_mg", default: 0.0
+      t.float "selenium_mu_g", default: 0.0
+      t.float "vit_c_mg"
+      t.float "thiamin_mg", default: 0.0
+      t.float "riboflavin_mg", default: 0.0
+      t.float "niacin_mg", default: 0.0
+      t.float "panto_acid_mg", default: 0.0
+      t.float "vit_b6_mg", default: 0.0
+      t.float "folate_tot_mu_g", default: 0.0
+      t.float "folic_acid_mu_g", default: 0.0
+      t.float "food_folate_mu_g", default: 0.0
+      t.float "folate_dfe_mu_g", default: 0.0
+      t.float "choline_tot_mg", default: 0.0
+      t.float "vit_b12_mu_g", default: 0.0
+      t.integer "vit_a_iu"
+      t.float "vit_a_rae", default: 0.0
+      t.float "retinol_mu_g", default: 0.0
+      t.float "alpha_carot_mu_g", default: 0.0
+      t.float "beta_carot_mu_g", default: 0.0
+      t.float "beta_crypt_mu_g", default: 0.0
+      t.float "lycopene_mu_g", default: 0.0
+      t.float "lut_zea_mu_g", default: 0.0
+      t.float "vit_e_mg", default: 0.0
+      t.float "vit_d_mu_g", default: 0.0
+      t.float "vit_d_iu", default: 0.0
+      t.float "vit_k_mu_g", default: 0.0
+      t.float "fa_sat_g"
+      t.float "fa_mono_g", default: 0.0
+      t.float "fa_poly_g", default: 0.0
+      t.integer "cholestrl_mg"
+      t.float "gmwt_1"
+      t.string "gmwt_desc1", limit: 120
+      t.float "gmwt_2", default: 0.0
+      t.string "gmwt_desc2", limit: 120
+      t.integer "refuse_pct"
+    end
+
     create_table "src_cd", primary_key: "src_cd", id: :integer, default: nil, force: :cascade, comment: "Source Code File Format" do |t|
       t.string "description", limit: 60
     end
 
-    create_table "weight", primary_key: "nbd_no", id: :integer, default: nil, force: :cascade, comment: "Weight File WEIGHT" do |t|
-      t.integer "seq"
-      t.decimal "amount", precision: 3
-      t.string "description", limit: 100
-      t.decimal "gram_weight", precision: 1
+    create_table "weight", primary_key: ["nbd_no", "seq"], force: :cascade, comment: "Weight File WEIGHT" do |t|
+      t.integer "nbd_no", null: false
+      t.integer "seq", null: false
+      t.decimal "amount"
+      t.string "description", limit: 200
+      t.decimal "gram_weight"
       t.integer "data_pts"
-      t.decimal "standard_deviation", precision: 3
+      t.decimal "standard_deviation"
     end
 
-    add_foreign_key "food_des", "fd_group", column: "fdggrp_cd", primary_key: "fdgrp_cd", name: "food_des_fd_group_fdgrp_cd_fk"
-    add_foreign_key "nut_data", "food_des", column: "nbd_no", primary_key: "nbd_no", name: "nut_data_food_des_nbd_no_fk"
-    add_foreign_key "nut_data", "nutr_def", column: "nutr_no", primary_key: "nutr_no", name: "nut_data_nutr_def_nutr_no_fk"
+    add_foreign_key "food_des", "fd_group", column: "fdgrp_cd", primary_key: "fdgrp_cd", name: "food_des_fd_group_fdgrp_cd_fk"
+    add_foreign_key "nut_dat", "food_des", column: "nbd_no", primary_key: "nbd_no", name: "nut_data_food_des_nbd_no_fk"
+    add_foreign_key "nut_dat", "nutr_def", column: "nutr_no", primary_key: "nutr_no", name: "nut_data_nutr_def_nutr_no_fk"
   end
 
   def self.down
