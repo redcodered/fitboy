@@ -22,8 +22,6 @@ interface FoodSearchState {
 export class FoodSearch extends React.Component<FoodSearchProps | any, {}> {
     public constructor(props) {
         super(props);
-        // this.handleSearch = this.handleSearch.bind(this);
-        // this.handleSelect = this.handleSelect.bind(this);
 
     }
     public handleSearch(value: string) : void {
@@ -68,9 +66,9 @@ export class FoodSearch extends React.Component<FoodSearchProps | any, {}> {
             (item) => { return this.renderGroup(item.group_name, item.items); });
         return (
             <AutoComplete
-                onChange={this.handleSearch}
+                onChange={this.handleSearch.bind(this)}
                 dataSource={children}
-                onSelect={this.handleSelect}
+                onSelect={this.handleSelect.bind(this)}
                 style={{ width: '100%' }}
             >
                 <Search
