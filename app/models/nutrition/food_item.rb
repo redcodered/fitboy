@@ -53,19 +53,19 @@ module Nutrition
             OR scientific_name ~* '%s' )
         HEREDOC
         ret = self.where(query.split.map { |w| q % ([w]*4) }.join(' AND '))
-                  .joins(:food_group)
-                  .limit(100)
-                  .group_by {|item| item.food_group.description }
-                  .map {|cat, items| {group_name: cat, items: items}}
+            .joins(:food_group)
+            .limit(100)
+            .group_by {|item| item.food_group.description }
+            .map {|cat, items| {group_name: cat, items: items}}
         return { results: ret }
       end
     end
 
     def nutrition
       ndp = nutrient_data_points
-            .includes(:nutrient)
-            .order('nutr_def.sr_order')
-            .to_a
+          .includes(:nutrient)
+          .order('nutr_def.sr_order')
+          .to_a
       serving_sizes.map { |portion| NutritionInfoStruct.new(portion, ndp) }
     end
 
@@ -73,7 +73,7 @@ module Nutrition
       NutrientDataPoint.find_by(
         nbd_no: nbd_no,
         nutr_no: KCAL_NUTR_NO)
-                       .nutrient_value.to_i
+          .nutrient_value.to_i
     end
 
     def readonly?
